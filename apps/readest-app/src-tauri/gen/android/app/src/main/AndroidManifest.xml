@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:largeHeap="true"
         android:enableOnBackInvokedCallback="false"
-        android:label="@string/app_name"
+        android:label="Readest EBK"
         android:theme="@style/Theme.readest"
         android:hardwareAccelerated="true"
         android:usesCleartextTraffic="${usesCleartextTraffic}">
@@ -50,7 +50,7 @@
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|navigation|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:launchMode="singleTask"
-            android:label="@string/main_activity_title"
+            android:label="Readest EBK"
             android:hardwareAccelerated="true"
             android:name=".MainActivity"
             android:exported="true">
