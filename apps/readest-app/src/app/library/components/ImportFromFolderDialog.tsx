@@ -29,6 +29,7 @@ export interface FormatGroup {
 
 export const DEFAULT_FORMAT_GROUPS: FormatGroup[] = [
   { id: 'epub', label: 'EPUB', exts: ['epub'] },
+  { id: 'ebk', label: 'EBK', exts: ['ebk'] },
   { id: 'pdf', label: 'PDF', exts: ['pdf'] },
   { id: 'mobi', label: 'MOBI/AZW/AZW3', exts: ['mobi', 'azw', 'azw3'] },
   { id: 'fb2', label: 'FB2', exts: ['fb2'] },

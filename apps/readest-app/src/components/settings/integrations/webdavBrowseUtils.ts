@@ -115,6 +115,7 @@ export const getEntryIcon = (filename: string): React.ComponentType<{ className?
     case 'cbz':
       return LuBookImage;
     case 'epub':
+    case 'ebk':
     case 'mobi':
     case 'azw':
     case 'azw3':

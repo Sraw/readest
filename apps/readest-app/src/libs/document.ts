@@ -3,6 +3,7 @@ import { Collection, Contributor, Identifier, LanguageMap } from '@/utils/book';
 import { configureZip } from '@/utils/zip';
 import { getOSPlatform } from '@/utils/misc';
 import { installPDFImageShrink } from '@/libs/pdfImageShrink';
+import { EbkFile, isEBK } from '@/libs/ebk/ebk';
 import { stripDuplicateMarker } from '@/utils/path';
 import type { WidePagesOptions } from '@/utils/spread';
 import * as epubcfi from 'foliate-js/epubcfi.js';
@@ -149,6 +150,7 @@ export interface BookDoc {
 
 export const EXTS: Record<BookFormat, string> = {
   EPUB: 'epub',
+  EBK: 'ebk',
   PDF: 'pdf',
   MOBI: 'mobi',
   AZW: 'azw',
@@ -170,6 +172,7 @@ export const EXTS: Record<BookFormat, string> = {
 
 export const MIMETYPES: Record<BookFormat, string[]> = {
   EPUB: ['application/epub+zip'],
+  EBK: ['application/x-ebk'],
   PDF: ['application/pdf'],
   MOBI: ['application/x-mobipocket-ebook'],
   AZW: ['application/vnd.amazon.ebook'],
@@ -551,7 +554,25 @@ export class DocumentLoader {
         const { file: epubFile } = await new TxtToEpubConverter().convert({ file: this.file });
         return await new DocumentLoader(epubFile).open();
       }
-      if (await this.isZip()) {
+      if (await isEBK(this.file)) {
+        // The worker reads the file itself, so it needs the bytes: a file Tauri reads on demand is read in first.
+        const bytes =
+          this.file.constructor === File ? this.file : new Blob([await this.file.arrayBuffer()]);
+        const ebk = await EbkFile.open(bytes);
+        try {
+          const { EPUB } = await import('foliate-js/epub.js');
+          book = await new EPUB(ebk.loader).init();
+        } catch (e) {
+          ebk.close();
+          throw e;
+        }
+        const destroy = book.destroy?.bind(book);
+        book.destroy = () => {
+          destroy?.();
+          ebk.close();
+        };
+        format = 'EBK';
+      } else if (await this.isZip()) {
         // EPUB-only fast path: ask Rust to pre-read OPF/nav/ncx + sizes.
         // CBZ/FBZ skip this -- they have no OPF and Rust has no parser
         // for them. We probe `isEPUBLike()` (= isZip but not CBZ/FBZ)

@@ -54,6 +54,7 @@ export const SETTINGS_FILENAME = 'settings.json';
 
 export const SUPPORTED_BOOK_EXTS = [
   'epub',
+  'ebk',
   'mobi',
   'azw',
   'azw3',

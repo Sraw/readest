@@ -138,6 +138,14 @@
         "rank": "Alternate"
       },
       {
+        "name": "EBK Document",
+        "ext": ["ebk"],
+        "description": "EBK file",
+        "mimeType": "application/x-ebk",
+        "role": "Viewer",
+        "rank": "Alternate"
+      },
+      {
         "name": "FB2 Document",
         "ext": ["fb2"],
         "contentTypes": ["com.readest.fb2"],

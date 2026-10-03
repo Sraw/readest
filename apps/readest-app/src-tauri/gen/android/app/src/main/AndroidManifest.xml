@@ -63,6 +63,9 @@
                 <data android:scheme="content" />
                 <data android:scheme="file" />
                 <data android:mimeType="application/epub+zip" />
+                <data android:mimeType="application/x-ebk" />
+                <!-- what file managers report for .ebk files; Readest tells the format from the file itself -->
+                <data android:mimeType="application/octet-stream" />
                 <data android:mimeType="application/pdf" />
                 <data android:mimeType="application/fb2" />
                 <data android:mimeType="application/x-fb2" />
@@ -91,6 +94,8 @@
                 <data android:mimeType="*/*" />
                 <data android:pathPattern=".*\\.epub" />
                 <data android:pathSuffix=".epub" />
+                <data android:pathPattern=".*\\.ebk" />
+                <data android:pathSuffix=".ebk" />
                 <data android:pathPattern=".*\\.pdf" />
                 <data android:pathSuffix=".pdf" />
                 <data android:pathPattern=".*\\.fb2" />
@@ -248,6 +253,15 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:mimeType="application/vnd.amazon.mobi8-ebook" />
                 <data android:pathPattern=".*\\.azw3" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="application/x-ebk" />
+                <data android:pathPattern=".*\\.ebk" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />

@@ -281,7 +281,10 @@ export const useReaderStore = create<ReaderStore>((set, get) => ({
       // Filter out invalid booknotes
       config.booknotes = config.booknotes?.filter((booknote) => booknote.cfi) ?? [];
       // Load cached book navigation (TOC + section fragments) or compute and persist.
-      if (book.format === 'EPUB' && bookDoc.rendition?.layout !== 'pre-paginated') {
+      if (
+        (book.format === 'EPUB' || book.format === 'EBK') &&
+        bookDoc.rendition?.layout !== 'pre-paginated'
+      ) {
         const cachedNav = await appService.loadBookNav(book);
         if (isBookNavCacheCurrent(cachedNav) && process.env.NODE_ENV === 'production') {
           hydrateBookNav(bookDoc, cachedNav);

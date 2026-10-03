@@ -8,6 +8,8 @@ import { AnnotationToolType } from './annotator';
 
 export type BookFormat =
   | 'EPUB'
+  // an EPUB's files in an EBK container (src/libs/ebk), rendered as EPUB
+  | 'EBK'
   | 'PDF'
   | 'MOBI'
   | 'AZW'

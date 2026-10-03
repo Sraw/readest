@@ -39,7 +39,7 @@ const BookMenu: React.FC<BookMenuProps> = ({ menuClassName, setIsDropdownOpen })
   const viewSettings = getViewSettings(sideBarBookKey!);
   const bookData = sideBarBookKey ? getBookData(sideBarBookKey) : null;
   const canPairAudiobook =
-    bookData?.book?.format === 'EPUB' &&
+    (bookData?.book?.format === 'EPUB' || bookData?.book?.format === 'EBK') &&
     bookData.bookDoc?.rendition?.layout !== 'pre-paginated' &&
     !!bookData.bookDoc?.toc?.length;
 
