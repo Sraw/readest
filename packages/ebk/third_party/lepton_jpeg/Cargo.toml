@@ -1,0 +1,61 @@
+# The manifest of lepton_jpeg 0.5.8 as published on crates.io, for the EBK fork, decoder only (EBK-CHANGES.md):
+# without the git-version dependency (change 3), the benchmarks and the tests' dependencies.
+
+[package]
+edition = "2024"
+rust-version = "1.89"
+name = "lepton_jpeg"
+version = "0.5.8"
+authors = ["Kristof Roomp <kristofr@microsoft.com>"]
+build = false
+autolib = false
+autobins = false
+autoexamples = false
+autotests = false
+autobenches = false
+description = "Rust port of the Lepton lossless JPEG compression library"
+readme = "README.md"
+categories = [
+    "multimedia::images",
+    "multimedia::encoding",
+    "compression",
+]
+license = "Apache-2.0"
+repository = "https://github.com/microsoft/lepton_jpeg_rust"
+
+[features]
+compression_stats = []
+default = []
+detailed_tracing = []
+
+[lib]
+name = "lepton_jpeg"
+crate-type = ["lib"]
+path = "src/lib.rs"
+
+[dependencies.bytemuck]
+version = "1"
+
+[dependencies.byteorder]
+version = "1.4"
+
+[dependencies.default-boxed]
+version = "0.2"
+
+[dependencies.flate2]
+version = "1.0"
+
+[dependencies.log]
+version = "0.4"
+
+[dependencies.wide]
+version = "0.8"
+
+[target.'cfg(target_os = "linux")'.dependencies.thread-priority]
+version = "1.0"
+
+[target.'cfg(target_os = "windows")'.dependencies.cpu-time]
+version = "1.0"
+
+[target.'cfg(target_os = "windows")'.dependencies.thread-priority]
+version = "1.0"

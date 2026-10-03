@@ -1,0 +1,17 @@
+[package]
+name = "ebk"
+description = "Reader for the EBK e-book container (the reader part of https://github.com/Sraw/ebk)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[features]
+default = ["jpeg"]
+# storage mode 4: JPEG files recompressed with Lepton
+jpeg = ["dep:lepton_jpeg"]
+
+[dependencies]
+brotli-decompressor = "6.0.1"
+crc32fast = "1.5.2"
+# the copy in this repository: storage mode 4 is defined by what it decodes (third_party/lepton_jpeg/EBK-CHANGES.md)
+lepton_jpeg = { path = "../../third_party/lepton_jpeg", version = "0.5.8", optional = true }

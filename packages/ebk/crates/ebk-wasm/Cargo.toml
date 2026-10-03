@@ -1,0 +1,13 @@
+[package]
+name = "ebk-wasm"
+description = "The EBK reader as a WebAssembly module (see apps/readest-app/src/workers/ebk.worker.ts for the JavaScript side)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+ebk = { path = "../ebk", default-features = false, features = ["jpeg"] }
